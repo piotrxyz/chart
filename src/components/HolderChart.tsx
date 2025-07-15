@@ -21,19 +21,22 @@ interface HolderChartProps {
 export const HolderChart = memo(
   ({ chartData, totalBalance, timestamp }: HolderChartProps) => {
     const screenSize = useScreenSize()
-    
-    const renderLabel = useCallback(({ name, percent }: { name: string; percent: number }) => {
-      if (screenSize === 'sm') {
-        return `${(percent * 100).toFixed(1)}%`
-      }
 
-      if (screenSize === 'md') {
-        const shortName = name === 'Smart Contract' ? 'SC' : name
-        return `${shortName} ${(percent * 100).toFixed(1)}%`
-      }
+    const renderLabel = useCallback(
+      ({ name, percent }: { name: string; percent: number }) => {
+        if (screenSize === 'sm') {
+          return `${(percent * 100).toFixed(1)}%`
+        }
 
-      return `${name} ${(percent * 100).toFixed(1)}%`
-    }, [screenSize])
+        if (screenSize === 'md') {
+          const shortName = name === 'Smart Contract' ? 'SC' : name
+          return `${shortName} ${(percent * 100).toFixed(1)}%`
+        }
+
+        return `${name} ${(percent * 100).toFixed(1)}%`
+      },
+      [screenSize]
+    )
     if (chartData.length === 0) {
       return (
         <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6">
@@ -63,12 +66,12 @@ export const HolderChart = memo(
             height={300}
             className="sm:!h-[350px] lg:!h-[400px]"
           >
-            <PieChart 
+            <PieChart
               key={`chart-${chartData.length}-${totalBalance}`}
               margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
             >
               <Pie
-                key={`pie-${chartData.length}-${chartData.map(d => d.value).join('-')}`}
+                key={`pie-${chartData.length}-${chartData.map((d) => d.value).join('-')}`}
                 data={chartData}
                 cx="50%"
                 cy="50%"
@@ -95,7 +98,8 @@ export const HolderChart = memo(
         </div>
       </div>
     )
-  })
+  }
+)
 
 HolderChart.displayName = 'HolderChart'
 
@@ -114,4 +118,3 @@ const renderCustomTooltip = (props: TooltipProps<number, string>) => {
   }
   return null
 }
-
