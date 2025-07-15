@@ -58,8 +58,9 @@ pnpm install
 3. Set up environment variables:
 
 ```bash
-cp .env.example .env.local
+cp .env.local
 # Edit .env.local with your API URL
+# API_URL=your-api-url
 ```
 
 4. Run the development server:
@@ -78,14 +79,6 @@ pnpm dev
 - `pnpm lint` - Run ESLint
 - `pnpm lint:fix` - Fix linting issues and format code
 - `pnpm type-check` - Run TypeScript type checking
-
-## Environment Variables
-
-Create a `.env.local` file with:
-
-```
-API_URL=your-api-url
-```
 
 ## Key Components
 
